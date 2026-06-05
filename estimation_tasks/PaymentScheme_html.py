@@ -8,8 +8,8 @@ from . import C, cu
 
 
 def content_block(player, components, **api_kwargs):
-    yield t"""<p>
-            For the main tasks, your payment depends on how accurate your estimate is — the closer you are to the true value, the more money you earn. You can earn up to {2 * C.TASK_BONUS} in total across both tasks.
+    yield f"""<p>
+            For the main tasks, your payment depends on how accurate your estimate is — the closer you are to the true value, the more money you earn. You can earn up to €{int(2 * C.TASK_BONUS)} in total across both tasks.
         </p>
         
         <details>
@@ -17,7 +17,7 @@ def content_block(player, components, **api_kwargs):
             <table class="table table-striped">
                 <tr>
                     <th>Deviation from correct answer</th>
-                    <th>Score (= % chance of {C.TASK_BONUS} bonus)</th>
+                    <th>Score (= % chance of €{int(C.TASK_BONUS)} bonus)</th>
                 </tr>
                 <tr><td>{C.DEV_0} percentage points</td><td>{C.CHANCE_100}%</td></tr>
                 <tr><td>{C.DEV_5} percentage points</td><td>{C.CHANCE_95}%</td></tr>

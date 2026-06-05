@@ -1,4 +1,3 @@
-from otree.api import url_of_static, url_of_upload
 
 
 from . import C, get_group_players, current_round_estimate, current_task

@@ -111,6 +111,20 @@ def propagate_participant_fields(players):
             p.task_order = random.choice(['political_first', 'neutral_first'])
             p.participant.public_group_id = 0
         p.participant.participant_task_order = p.task_order
+def setup_estimation_groups(session):
+    # Build the Part 2 (estimation_tasks) group structure now, while every
+    # participant is synchronised at this wait page and public_group_id has just
+    # been assigned. Doing it here means Part 2 needs no all-players wait page:
+    # each public group only waits for its own members on the group pages, and
+    # one group finishing early never holds up another.
+    for ss in session.get_subsessions():
+        if ss.get_folder_name() != 'estimation_tasks':
+            continue
+        groups = {}
+        for p in ss.get_players():
+            pgid = p.participant.public_group_id
+            groups.setdefault(pgid, []).append(p)
+        ss.set_group_matrix(list(groups.values()))
 # </helper-functions>
 class Welcome(Page):
     form_model = 'player'
@@ -165,6 +179,7 @@ class GroupingWait(WaitPage):
         assign_audience(players)
         assign_public_groups(players)
         propagate_participant_fields(players)
+        setup_estimation_groups(group.session)
 class EndOfPart1(Page):
     @staticmethod
     def bot_available_submissions(id_in_group, round_number, session_config):

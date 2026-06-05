@@ -14,6 +14,7 @@ PARTICIPANT_FIELDS = dict(
     participant_task_order = models.StringField(choices=['political_first', 'neutral_first']),
     participant_task_version = models.StringField(choices=['A', 'B']),
     public_group_id = models.IntegerField(),
+    stopped_at = models.FloatField(),
 )
 SESSION_FIELDS = dict(
 )

@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from otree.api import url_of_static
-
 _GLOBAL_STYLES_PATH = Path(__file__).parent / '_static' / 'global-styles.css'
 
 
@@ -10,4 +8,4 @@ def global_styles_block(*args, **kwargs):
     yield f'''<style>
 {css}
 </style>'''
-    yield f'''<script src="{url_of_static('otai-utils.js')}"></script>'''
+    yield '''<script src="/_static/otai-utils.js"></script>'''

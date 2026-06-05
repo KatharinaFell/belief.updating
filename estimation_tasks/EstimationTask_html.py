@@ -1,4 +1,3 @@
-from otree.api import url_of_static, url_of_upload
 
 
 from . import C, current_task, compute_score_and_win, scenario_config, version_for_task

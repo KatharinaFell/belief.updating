@@ -96,15 +96,6 @@ def main_justification_error_message(player: Player, value):
 def filler_justification_error_message(player: Player, value):
     if value.isdigit():
         return "Please provide a text explanation, not just a number."
-def creating_session(subsession: Subsession):
-    players = subsession.get_players()
-    groups_dict = {}
-    for p in players:
-        pgid = p.participant.public_group_id
-        if pgid not in groups_dict:
-            groups_dict[pgid] = []
-        groups_dict[pgid].append(p)
-    subsession.set_group_matrix(list(groups_dict.values()))
 # </hook-functions>
 # the below function(s) are user-defined, not called by oTree
 # <helper-functions>
@@ -342,6 +333,13 @@ class MoralConviction(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
+class FinalPayment(Page):
+    @staticmethod
+    def bot_available_submissions(id_in_group, round_number, session_config):
+        return [dict(fields=dict(), button_label='Next')]
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 2
 class End(Page):
     @staticmethod
     def bot_available_submissions(id_in_group, round_number, session_config):
@@ -353,4 +351,4 @@ class End(Page):
     def before_next_page(player: Player, timeout_happened):
         import time
         player.participant.stopped_at = time.time()
-page_sequence = [PaymentScheme, ExampleTask, EstimationTask, EstimationJustification, PrivateRecommendation, PeerEstimatesWait, PeerEstimates, PublicRecommendation, PublicRecommendationWait, MoralConviction, End]
+page_sequence = [PaymentScheme, ExampleTask, EstimationTask, EstimationJustification, PrivateRecommendation, PeerEstimatesWait, PeerEstimates, PublicRecommendation, PublicRecommendationWait, MoralConviction, FinalPayment, End]
