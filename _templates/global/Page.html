@@ -1,0 +1,26 @@
+{{ extends "otree/Page.html" }}
+
+{{ block global_styles  }}
+    <style>
+.formula-center {
+text-align: center;
+font-style: italic;
+}
+
+.otree-btn-next {
+background-color: #e0e0e0;
+border: 2px solid #000;
+color: #000;
+font-style: normal;
+}
+
+.powered-by-otree {
+display: none !important;
+}
+
+details table {
+margin-top: 10px;
+}
+    </style>
+    <script src="{{ static 'otai-utils.js' }}"></script>
+{{ endblock }}
